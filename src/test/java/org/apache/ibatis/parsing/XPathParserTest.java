@@ -29,14 +29,20 @@ public class XPathParserTest {
     String resource = "resources/nodelet_test.xml";
     InputStream inputStream = Resources.getResourceAsStream(resource);
     XPathParser parser = new XPathParser(inputStream, false, null, null);
+    //对于XML作为一个文档树来处理   / 为根节点
+    //XPath 
     assertEquals((Long)1970l, parser.evalLong("/employee/birth_date/year"));
     assertEquals((short) 6, (short) parser.evalShort("/employee/birth_date/month"));
     assertEquals((Integer) 15, parser.evalInteger("/employee/birth_date/day"));
     assertEquals((Float) 5.8f, parser.evalFloat("/employee/height"));
     assertEquals((Double) 5.8d, parser.evalDouble("/employee/height"));
+    //取得employee节点的attribute
     assertEquals("${id_var}", parser.evalString("/employee/@id"));
     assertEquals(Boolean.TRUE, parser.evalBoolean("/employee/active"));
+    
+    //XPath中有7中节点 元素,属性,文本,命名空间,处理指令,注释,文档(根)节点
     assertEquals("<id>${id_var}</id>", parser.evalNode("/employee/@id").toString().trim());
+    //选取 employee节点所有的子元素
     assertEquals(7, parser.evalNodes("/employee/*").size());
     XNode node = parser.evalNode("/employee/height");
     assertEquals("employee/height", node.getPath());
