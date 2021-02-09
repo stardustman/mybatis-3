@@ -15,14 +15,15 @@
  */
 package org.apache.ibatis.datasource;
 
-import java.util.Properties;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * @author Clinton Begin
  */
 public interface DataSourceFactory {
 
+  // 配置
   void setProperties(Properties props);
 
   DataSource getDataSource();

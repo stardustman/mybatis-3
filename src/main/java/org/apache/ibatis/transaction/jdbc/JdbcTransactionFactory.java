@@ -15,18 +15,17 @@
  */
 package org.apache.ibatis.transaction.jdbc;
 
-import java.sql.Connection;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import org.apache.ibatis.session.TransactionIsolationLevel;
 import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.TransactionFactory;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.util.Properties;
+
 /**
  * Creates {@link JdbcTransaction} instances.
- *
+ * 创建 JdbcTransaction
  * @author Clinton Begin
  *
  * @see JdbcTransaction
@@ -37,6 +36,7 @@ public class JdbcTransactionFactory implements TransactionFactory {
   public void setProperties(Properties props) {
   }
 
+  // 包装下 connection
   @Override
   public Transaction newTransaction(Connection conn) {
     return new JdbcTransaction(conn);

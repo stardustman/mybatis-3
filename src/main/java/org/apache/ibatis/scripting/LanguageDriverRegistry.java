@@ -27,10 +27,12 @@ public class LanguageDriverRegistry {
 
   private Class<?> defaultDriverClass;
 
+  // 通过类型注册
   public void register(Class<?> cls) {
     if (cls == null) {
       throw new IllegalArgumentException("null is not a valid Language Driver");
     }
+    // 没有 cls 这个 LanguageDriver 类型
     if (!LANGUAGE_DRIVER_MAP.containsKey(cls)) {
       try {
         LANGUAGE_DRIVER_MAP.put(cls, (LanguageDriver) cls.newInstance());
@@ -40,10 +42,12 @@ public class LanguageDriverRegistry {
     }
   }
 
+  // 注册实例
   public void register(LanguageDriver instance) {
     if (instance == null) {
       throw new IllegalArgumentException("null is not a valid Language Driver");
     }
+    // 拿到 cls 的类型
     Class<?> cls = instance.getClass();
     if (!LANGUAGE_DRIVER_MAP.containsKey(cls)) {
       LANGUAGE_DRIVER_MAP.put(cls, instance);
@@ -63,6 +67,7 @@ public class LanguageDriverRegistry {
   }
 
   public void setDefaultDriverClass(Class<?> defaultDriverClass) {
+    // 先注册
     register(defaultDriverClass);
     this.defaultDriverClass = defaultDriverClass;
   }

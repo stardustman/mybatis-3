@@ -15,22 +15,13 @@
  */
 package org.apache.ibatis.type;
 
+import org.apache.ibatis.io.ResolverUtil;
+import org.apache.ibatis.io.Resources;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.ibatis.io.ResolverUtil;
-import org.apache.ibatis.io.Resources;
+import java.util.*;
 
 /**
  * @author Clinton Begin
@@ -102,6 +93,7 @@ public class TypeAliasRegistry {
 
   @SuppressWarnings("unchecked")
   // throws class cast exception as well if types cannot be assigned
+  // 根据类名查询类
   public <T> Class<T> resolveAlias(String string) {
     try {
       if (string == null) {
@@ -113,6 +105,7 @@ public class TypeAliasRegistry {
       if (TYPE_ALIASES.containsKey(key)) {
         value = (Class<T>) TYPE_ALIASES.get(key);
       } else {
+        // 装载 class
         value = (Class<T>) Resources.classForName(string);
       }
       return value;
@@ -174,4 +167,7 @@ public class TypeAliasRegistry {
     return Collections.unmodifiableMap(TYPE_ALIASES);
   }
 
+  public static void main(String[] args){
+    System.out.println(Integer.class.getSimpleName());
+  }
 }

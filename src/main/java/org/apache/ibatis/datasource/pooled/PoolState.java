@@ -25,7 +25,9 @@ public class PoolState {
 
   protected PooledDataSource dataSource;
 
+  // 空闲
   protected final List<PooledConnection> idleConnections = new ArrayList<PooledConnection>();
+  // 激活
   protected final List<PooledConnection> activeConnections = new ArrayList<PooledConnection>();
   protected long requestCount = 0;
   protected long accumulatedRequestTime = 0;
@@ -44,10 +46,12 @@ public class PoolState {
     return requestCount;
   }
 
+  // 平均请求时间
   public synchronized long getAverageRequestTime() {
     return requestCount == 0 ? 0 : accumulatedRequestTime / requestCount;
   }
 
+  // 平均等待时间
   public synchronized long getAverageWaitTime() {
     return hadToWaitCount == 0 ? 0 : accumulatedWaitTime / hadToWaitCount;
 

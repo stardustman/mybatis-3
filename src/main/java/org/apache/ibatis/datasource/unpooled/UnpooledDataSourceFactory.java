@@ -15,14 +15,13 @@
  */
 package org.apache.ibatis.datasource.unpooled;
 
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import org.apache.ibatis.datasource.DataSourceException;
 import org.apache.ibatis.datasource.DataSourceFactory;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * @author Clinton Begin
@@ -32,6 +31,7 @@ public class UnpooledDataSourceFactory implements DataSourceFactory {
   private static final String DRIVER_PROPERTY_PREFIX = "driver.";
   private static final int DRIVER_PROPERTY_PREFIX_LENGTH = DRIVER_PROPERTY_PREFIX.length();
 
+  // 同一个 package 下可访问
   protected DataSource dataSource;
 
   public UnpooledDataSourceFactory() {

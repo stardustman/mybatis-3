@@ -38,6 +38,7 @@ public abstract class TypeReference<T> {
     if (genericSuperclass instanceof Class) {
       // try to climb up the hierarchy until meet something useful
       if (TypeReference.class != genericSuperclass) {
+        // 递归查询
         return getSuperclassTypeParameter(clazz.getSuperclass());
       }
 
